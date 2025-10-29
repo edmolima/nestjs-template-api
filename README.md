@@ -2,9 +2,6 @@
   <a href="http://nestjs.com/" target="blank"><img src="https://nestjs.com/img/logo-small.svg" width="120" alt="Nest Logo" /></a>
 </p>
 
-[circleci-image]: https://img.shields.io/circleci/build/github/nestjs/nest/master?token=abc123def456
-[circleci-url]: https://circleci.com/gh/nestjs/nest
-
   <p align="center">A progressive <a href="http://nodejs.org" target="_blank">Node.js</a> framework for building efficient and scalable server-side applications.</p>
     <p align="center">
 <a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/v/@nestjs/core.svg" alt="NPM Version" /></a>
@@ -28,7 +25,7 @@
 ## Project setup
 
 ```bash
-$ pnpm install
+pnpm install
 ```
 
 ## Compile and run the project
@@ -57,6 +54,39 @@ $ pnpm run test:e2e
 $ pnpm run test:cov
 ```
 
+## Local Postgres (Docker)
+
+This template includes TypeORM configured to connect to Postgres using environment variables. A simple Docker Compose file is included to run Postgres locally.
+
+Quick start:
+
+1. Copy the example env file:
+
+```bash
+cp .env.example .env
+```
+
+2. Start Postgres with Docker Compose:
+
+```bash
+docker compose up -d
+```
+
+Or run with docker directly:
+
+```bash
+docker run --name nest-postgres -e POSTGRES_USER=postgres -e POSTGRES_PASSWORD=postgres -e POSTGRES_DB=postgres -p 5432:5432 -v pgdata:/var/lib/postgresql/data -d postgres:15
+```
+
+3. Start the app (after installing deps):
+
+```bash
+pnpm install
+pnpm run start:dev
+```
+
+The app will connect using the variables in `.env` (the defaults point to `localhost:5432`).
+
 ## Deployment
 
 When you're ready to deploy your NestJS application to production, there are some key steps you can take to ensure it runs as efficiently as possible. Check out the [deployment documentation](https://docs.nestjs.com/deployment) for more information.
@@ -64,8 +94,8 @@ When you're ready to deploy your NestJS application to production, there are som
 If you are looking for a cloud-based platform to deploy your NestJS application, check out [Mau](https://mau.nestjs.com), our official platform for deploying NestJS applications on AWS. Mau makes deployment straightforward and fast, requiring just a few simple steps:
 
 ```bash
-$ pnpm install -g @nestjs/mau
-$ mau deploy
+pnpm install -g @nestjs/mau
+mau deploy
 ```
 
 With Mau, you can deploy your application in just a few clicks, allowing you to focus on building features rather than managing infrastructure.
