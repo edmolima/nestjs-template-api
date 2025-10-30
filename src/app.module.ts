@@ -1,23 +1,16 @@
 import { Module } from '@nestjs/common';
-import { TypeOrmModule } from '@nestjs/typeorm';
-import { AppController } from './app.controller';
-import { AppService } from './app.service';
+import { ConfigModule } from '@nestjs/config';
+import { DatabaseModule } from './database/database.module';
+import { HelloModule } from './hello/hello.module';
 
 @Module({
   imports: [
-    TypeOrmModule.forRoot({
-      type: 'postgres',
-      host: process.env.POSTGRES_HOST ?? 'localhost',
-      port: parseInt(process.env.POSTGRES_PORT ?? '5432', 10),
-      username: process.env.POSTGRES_USER ?? 'postgres',
-      password: process.env.POSTGRES_PASSWORD ?? 'postgres',
-      database: process.env.POSTGRES_DB ?? 'postgres',
-      entities: [__dirname + '/**/*.entity{.ts,.js}'],
-      // synchronize should be false in production. It's okay for a local dev template.
-      synchronize: true,
+    ConfigModule.forRoot({
+      isGlobal: true,
+      envFilePath: '.env',
     }),
+    DatabaseModule,
+    HelloModule,
   ],
-  controllers: [AppController],
-  providers: [AppService],
 })
 export class AppModule {}
