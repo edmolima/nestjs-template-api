@@ -2,7 +2,7 @@
 
 > A modern, production-ready NestJS template with **Hexagonal Architecture**, TypeORM, PostgreSQL, and comprehensive documentation.
 
-[![Node Version](https://img.shields.io/badge/node-18%2B-brightgreen)](https://nodejs.org)
+[![Node Version](https://img.shields.io/badge/node-20%2B-brightgreen)](https://nodejs.org)
 [![TypeScript](https://img.shields.io/badge/typescript-5.9-blue)](https://www.typescriptlang.org)
 [![License](https://img.shields.io/badge/license-MIT-green.svg)](LICENSE)
 
@@ -27,7 +27,7 @@ This is a **clean, opinionated NestJS starter template** that follows **Hexagona
 
 ### Prerequisites
 
-- **Node.js** 18+ | [Install](https://nodejs.org)
+- **Node.js** 20+ (LTS) | [Install](https://nodejs.org)
 - **pnpm** 8+ | `npm install -g pnpm`
 - **Docker & Docker Compose** | [Install](https://docker.com)
 
