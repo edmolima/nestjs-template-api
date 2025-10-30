@@ -1,102 +1,396 @@
-<p align="center">
-  <a href="http://nestjs.com/" target="blank"><img src="https://nestjs.com/img/logo-small.svg" width="120" alt="Nest Logo" /></a>
-</p>
+# NestJS Hexagonal Template API
 
-  <p align="center">A progressive <a href="http://nodejs.org" target="_blank">Node.js</a> framework for building efficient and scalable server-side applications.</p>
-    <p align="center">
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/v/@nestjs/core.svg" alt="NPM Version" /></a>
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/l/@nestjs/core.svg" alt="Package License" /></a>
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/dm/@nestjs/common.svg" alt="NPM Downloads" /></a>
-<a href="https://circleci.com/gh/nestjs/nest" target="_blank"><img src="https://img.shields.io/circleci/build/github/nestjs/nest/master" alt="CircleCI" /></a>
-<a href="https://discord.gg/G7Qnnhy" target="_blank"><img src="https://img.shields.io/badge/discord-online-brightgreen.svg" alt="Discord"/></a>
-<a href="https://opencollective.com/nest#backer" target="_blank"><img src="https://opencollective.com/nest/backers/badge.svg" alt="Backers on Open Collective" /></a>
-<a href="https://opencollective.com/nest#sponsor" target="_blank"><img src="https://opencollective.com/nest/sponsors/badge.svg" alt="Sponsors on Open Collective" /></a>
-  <a href="https://paypal.me/kamilmysliwiec" target="_blank"><img src="https://img.shields.io/badge/Donate-PayPal-ff3f59.svg" alt="Donate us"/></a>
-    <a href="https://opencollective.com/nest#sponsor"  target="_blank"><img src="https://img.shields.io/badge/Support%20us-Open%20Collective-41B883.svg" alt="Support us"></a>
-  <a href="https://twitter.com/nestframework" target="_blank"><img src="https://img.shields.io/twitter/follow/nestframework.svg?style=social&label=Follow" alt="Follow us on Twitter"></a>
-</p>
-  <!--[![Backers on Open Collective](https://opencollective.com/nest/backers/badge.svg)](https://opencollective.com/nest#backer)
-  [![Sponsors on Open Collective](https://opencollective.com/nest/sponsors/badge.svg)](https://opencollective.com/nest#sponsor)-->
+> A modern, production-ready NestJS template with **Hexagonal Architecture**, TypeORM, PostgreSQL, and comprehensive documentation.
 
-## Description
+[![Node Version](https://img.shields.io/badge/node-18%2B-brightgreen)](https://nodejs.org)
+[![TypeScript](https://img.shields.io/badge/typescript-5.9-blue)](https://www.typescriptlang.org)
+[![License](https://img.shields.io/badge/license-MIT-green.svg)](LICENSE)
 
-[Nest](https://github.com/nestjs/nest) framework TypeScript starter repository.
+---
 
-## Project setup
+## Overview
+
+This is a **clean, opinionated NestJS starter template** that follows **Hexagonal Architecture** principles. Build scalable APIs with clear separation of concerns, testable business logic, and zero framework dependencies in your domain layer.
+
+### Why This Template?
+
+- 🏗️ **Hexagonal Architecture** – Domain logic separated from infrastructure
+- 🧪 **Testable** – Pure business logic, framework-agnostic use-cases
+- 📚 **Documented** – Architecture guide, database guide, development guide
+- 🗄️ **Database Ready** – TypeORM + PostgreSQL with migrations & seeders
+- ⚙️ **Global Config** – ConfigModule for environment management
+- 🚀 **Production Ready** – Error handling, logging, Docker support
+
+---
+
+## Quick Start
+
+### Prerequisites
+
+- **Node.js** 18+ | [Install](https://nodejs.org)
+- **pnpm** 8+ | `npm install -g pnpm`
+- **Docker & Docker Compose** | [Install](https://docker.com)
+
+### 1. Clone & Install
 
 ```bash
+git clone <repo-url>
+cd nestjs-template-api
 pnpm install
 ```
 
-## Compile and run the project
-
-```bash
-# development
-$ pnpm run start
-
-# watch mode
-$ pnpm run start:dev
-
-# production mode
-$ pnpm run start:prod
-```
-
-## Run tests
-
-```bash
-# unit tests
-$ pnpm run test
-
-# e2e tests
-$ pnpm run test:e2e
-
-# test coverage
-$ pnpm run test:cov
-```
-
-## Local Postgres (Docker)
-
-This template includes TypeORM configured to connect to Postgres using environment variables. A simple Docker Compose file is included to run Postgres locally.
-
-Quick start:
-
-1. Copy the example env file:
+### 2. Environment Setup
 
 ```bash
 cp .env.example .env
 ```
 
-2. Start Postgres with Docker Compose:
+Default `.env` works for local development with Docker PostgreSQL.
+
+### 3. Start PostgreSQL
 
 ```bash
 docker compose up -d
 ```
 
-Or run with docker directly:
+### 4. Run Migrations
 
 ```bash
-docker run --name nest-postgres -e POSTGRES_USER=postgres -e POSTGRES_PASSWORD=postgres -e POSTGRES_DB=postgres -p 5432:5432 -v pgdata:/var/lib/postgresql/data -d postgres:15
+pnpm typeorm:migrate
 ```
 
-3. Start the app (after installing deps):
+### 5. Start Server
 
 ```bash
-pnpm install
-pnpm run start:dev
+pnpm start:dev
 ```
 
-The app will connect using the variables in `.env` (the defaults point to `localhost:5432`).
+Server runs at **http://localhost:3000**
 
-## Deployment
-
-When you're ready to deploy your NestJS application to production, there are some key steps you can take to ensure it runs as efficiently as possible. Check out the [deployment documentation](https://docs.nestjs.com/deployment) for more information.
-
-If you are looking for a cloud-based platform to deploy your NestJS application, check out [Mau](https://mau.nestjs.com), our official platform for deploying NestJS applications on AWS. Mau makes deployment straightforward and fast, requiring just a few simple steps:
+### 6. Test It
 
 ```bash
-pnpm install -g @nestjs/mau
-mau deploy
+curl http://localhost:3000/hello
+# {"id":1,"name":null,"message":"Hello World!","createdAt":"..."}
+
+curl 'http://localhost:3000/hello?name=Alice'
+# {"id":2,"name":"Alice","message":"Hello Alice!","createdAt":"..."}
 ```
+
+---
+
+## Documentation
+
+Learn more about this template:
+
+| Guide | Description |
+| --- | --- |
+| [**Architecture**](./docs/ARCHITECTURE.md) | Hexagonal pattern, module structure, how to add features |
+| [**Database**](./docs/DATABASE.md) | Migrations, seeders, TypeORM, PostgreSQL setup |
+| [**Development**](./docs/DEVELOPMENT.md) | Setup, scripts, testing examples, troubleshooting |
+
+---
+
+## Project Structure
+
+```
+src/
+├── config/               # Global configuration (ConfigModule)
+├── database/             # Database infrastructure
+│   ├── database.module.ts
+│   ├── data-source.ts
+│   ├── migrations/       # Schema migrations
+│   └── seeders/          # Database seeders
+├── hello/                # Feature module (hexagonal example)
+│   ├── domain/           # Business models
+│   ├── application/      # Use-cases (business logic)
+│   ├── infra/            # Controllers, entities (adapters)
+│   └── hello.module.ts
+├── app.module.ts         # Root module
+└── main.ts               # App entry
+
+docs/
+├── ARCHITECTURE.md       # Hexagonal guide
+├── DATABASE.md           # Database operations
+└── DEVELOPMENT.md        # Setup & workflows
+```
+
+---
+
+## Available Commands
+
+```bash
+# 🚀 Development
+pnpm start:dev          # Watch mode with hot reload
+pnpm start:debug        # Debug mode (--inspect)
+
+# 🏗️ Build & Run
+pnpm build              # Compile TypeScript
+pnpm start:prod         # Run production build
+
+# 🧪 Testing
+pnpm test               # Run unit tests
+pnpm test:watch         # Watch mode
+pnpm test:e2e           # End-to-end tests
+pnpm test:cov           # Coverage report
+
+# 🗄️ Database
+pnpm typeorm:migrate    # Run pending migrations
+pnpm typeorm:revert     # Revert last migration
+pnpm db:seed            # Run seeders
+
+# 🎨 Code Quality
+pnpm lint               # Fix ESLint issues
+pnpm format             # Format with Prettier
+```
+
+---
+
+## Features
+
+### 🏗️ Hexagonal Architecture
+
+Clear separation between **domain logic** (business rules), **application** (use-cases), and **infrastructure** (controllers, databases):
+
+```typescript
+// Pure business logic (testable, framework-agnostic)
+@Injectable()
+export class SayHelloUseCase {
+  constructor(@InjectRepository(HelloEntity) private repo: Repository<HelloEntity>) {}
+
+  async execute(name?: string) {
+    const message = `Hello ${name ?? 'World'}!`;
+    return this.repo.save(this.repo.create({ name, message }));
+  }
+}
+```
+
+### ⚙️ Global Configuration
+
+Environment variables managed centrally via ConfigService:
+
+```typescript
+// Available everywhere
+constructor(private config: ConfigService) {
+  const dbHost = this.config.get('POSTGRES_HOST');
+}
+```
+
+### 🗄️ Database Management
+
+- **Migrations**: Version control for schema changes
+- **Seeders**: Initialize development/test data
+- **TypeORM**: Production-grade ORM with full query support
+
+### 📦 Ready for Production
+
+- Error handling & logging
+- Docker support (compose included)
+- Environment-based configuration
+- TypeScript strict mode
+- ESLint + Prettier
+
+---
+
+## Example: Creating a Todo Feature
+
+Complete implementation following hexagonal pattern – see [DEVELOPMENT.md](./docs/DEVELOPMENT.md) for full walkthrough.
+
+---
+
+## Database Setup
+
+### Local Development (Docker)
+
+```bash
+docker compose up -d
+```
+
+Starts PostgreSQL with:
+- Host: `localhost`
+- Port: `5432`
+- User: `postgres`
+- Password: `postgres`
+- Database: `postgres`
+
+### Migrations
+
+```bash
+# Create schema
+pnpm typeorm:migrate
+
+# Revert last change
+pnpm typeorm:revert
+
+# Seed data
+pnpm db:seed
+```
+
+See [DATABASE.md](./docs/DATABASE.md) for detailed instructions.
+
+---
+
+## Testing
+
+### Unit Tests
+
+```bash
+pnpm test
+```
+
+Test use-cases in isolation (no database required).
+
+### E2E Tests
+
+```bash
+pnpm test:e2e
+```
+
+Test full HTTP flow with real database.
+
+### Coverage
+
+```bash
+pnpm test:cov
+```
+
+See [DEVELOPMENT.md](./docs/DEVELOPMENT.md) for examples.
+
+---
+
+## Environment Variables
+
+```env
+# Database
+POSTGRES_HOST=localhost
+POSTGRES_PORT=5432
+POSTGRES_USER=postgres
+POSTGRES_PASSWORD=postgres
+POSTGRES_DB=postgres
+
+# Application
+PORT=3000
+NODE_ENV=development
+
+# Synchronize schema (dev only)
+SYNCHRONIZE=true
+```
+
+Copy `.env.example` to `.env` to get started.
+
+---
+
+## Architecture Highlights
+
+### Layered Design
+
+```
+HTTP Request
+    ↓
+Controller (infra adapter)
+    ↓
+Use-Case (application/business)
+    ↓
+Repository (infra/persistence)
+    ↓
+Database
+```
+
+**Benefits:**
+- ✅ Business logic has **zero framework dependencies**
+- ✅ Easy to **test use-cases** without mocking HTTP
+- ✅ Easy to **swap implementations** (e.g., different DB)
+- ✅ **Clear responsibilities** in each layer
+
+Learn more in [ARCHITECTURE.md](./docs/ARCHITECTURE.md).
+
+---
+
+## Production Checklist
+
+- [ ] Set `SYNCHRONIZE=false` in `.env`
+- [ ] Use TypeORM migrations (not auto-sync)
+- [ ] Configure proper error handling
+- [ ] Set up logging (winston/pino)
+- [ ] Add input validation (class-validator)
+- [ ] Add rate limiting
+- [ ] Enable CORS if needed
+- [ ] Set up monitoring
+- [ ] Use secrets manager (not `.env`)
+- [ ] Add API documentation (Swagger)
+
+---
+
+## Troubleshooting
+
+### Port 3000 in Use
+
+```bash
+lsof -ti:3000 | xargs kill -9
+```
+
+### Database Connection Failed
+
+```bash
+# Check PostgreSQL is running
+docker ps
+
+# Verify .env variables
+cat .env
+
+# Restart container
+docker compose restart
+```
+
+### TypeScript Errors in Editor
+
+```bash
+# Restart TS server (VS Code)
+Cmd+Shift+P → "TypeScript: Restart TS Server"
+
+# Or reinstall
+rm -rf node_modules && pnpm install
+```
+
+See [DEVELOPMENT.md](./docs/DEVELOPMENT.md) for more.
+
+---
+
+## Contributing
+
+1. Fork repository
+2. Create feature branch: `git checkout -b feature/amazing`
+3. Follow [ARCHITECTURE.md](./docs/ARCHITECTURE.md)
+4. Add tests
+5. Run `pnpm lint && pnpm format`
+6. Commit: `git commit -am 'Add amazing feature'`
+7. Push and open PR
+
+---
+
+## License
+
+MIT © 2024
+
+---
+
+## Resources
+
+- [NestJS Documentation](https://docs.nestjs.com)
+- [TypeORM Documentation](https://typeorm.io)
+- [Hexagonal Architecture](https://alistair.cockburn.us/hexagonal-architecture/)
+- [PostgreSQL Documentation](https://www.postgresql.org/docs)
+
+---
+
+## Support
+
+- 📖 Read [DEVELOPMENT.md](./docs/DEVELOPMENT.md)
+- 🏗️ Review [ARCHITECTURE.md](./docs/ARCHITECTURE.md)
+- 🗄️ Check [DATABASE.md](./docs/DATABASE.md)
+- 🐛 Open an issue
+
+**Happy coding! 🚀**
 
 With Mau, you can deploy your application in just a few clicks, allowing you to focus on building features rather than managing infrastructure.
 
