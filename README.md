@@ -34,7 +34,7 @@ This is a **clean, opinionated NestJS starter template** that follows **Hexagona
 ### 1. Clone & Install
 
 ```bash
-git clone <repo-url>
+git clone https://github.com/edmolima/nestjs-template-api
 cd nestjs-template-api
 pnpm install
 ```
@@ -65,7 +65,7 @@ pnpm typeorm:migrate
 pnpm start:dev
 ```
 
-Server runs at **http://localhost:3000**
+Server runs at **<http://localhost:3000>**
 
 ### 6. Test It
 
@@ -207,6 +207,7 @@ docker compose up -d
 ```
 
 Starts PostgreSQL with:
+
 - Host: `localhost`
 - Port: `5432`
 - User: `postgres`
@@ -297,6 +298,7 @@ Database
 ```
 
 **Benefits:**
+
 - ✅ Business logic has **zero framework dependencies**
 - ✅ Easy to **test use-cases** without mocking HTTP
 - ✅ Easy to **swap implementations** (e.g., different DB)
