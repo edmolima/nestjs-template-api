@@ -23,7 +23,7 @@
     "db:seed": "ts-node -r tsconfig-paths/register src/database/seeders/seed.ts"
   },
   "dependencies": {
-    "@nestjs/common": "^11.1.8",
+    "@nestjs/common": "^11.1.9",
     "@nestjs/config": "^4.0.2",
     "@nestjs/core": "^11.1.8",
     "@nestjs/platform-express": "^11.1.8",
